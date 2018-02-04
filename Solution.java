@@ -15,14 +15,14 @@ class Car
 	}
 	
 	// Accessor Methods
-	public boolean isEngineFitted() 		{ return engineFitted;}
-	public boolean isTyreFitted()			{ return tyreFitted;}
-	public boolean isLightSystemFitted()	{ return lightSystemFitted;}
-	public boolean iCarReady()				{ return engineFitted && tyreFitted && lightSystemFitted;  }
+	public boolean isEngineFitted() { return engineFitted;}
+	public boolean isTyreFitted()	{ return tyreFitted;}
+	public boolean isLightSystemFitted(){ return lightSystemFitted;}
+	public boolean iCarReady(){ return engineFitted && tyreFitted && lightSystemFitted;  }
 	
 	// Methods to fit Engine, Tyres and Light System into Car
-	public void fitEngine() 	{ engineFitted = true;}
-	public void fitTyres()		{ tyreFitted = true;  }
+	public void fitEngine() { engineFitted = true;}
+	public void fitTyres()	{ tyreFitted = true;  }
 	public void fitLightSystem(){ lightSystemFitted = true;}	
 	
 } // End of Class Car
@@ -34,24 +34,24 @@ class Slot
 	private JButton engineButton;			// Engine Button of Slot
 	private JButton tyreButton;				// Tyre Button of Slot 
 	private JButton lightSystemButton;		// Light System Button of Slot 
-	private Car 	car;					// Car held by the Slot
+	private Car car;					// Car held by the Slot
 	
 	// Constructor Method
 	Slot(JLabel slotHeadingLabel, JButton engineButton, JButton tyreButton, JButton lightSystemButton)
 	{
 		this.slotHeadingLabel 	= slotHeadingLabel;
-		this.engineButton 		= engineButton;
-		this.tyreButton			= tyreButton;
+		this.engineButton = engineButton;
+		this.tyreButton	= tyreButton;
 		this.lightSystemButton	= lightSystemButton;
-		this.car				= null; 				// <-- Initially Slot Holds No Car
+		this.car= null; 				// <-- Initially Slot Holds No Car
 	}
 	
 	// Accessor Methods
-	public JLabel getSlotHeadingLabel()		{ return this.slotHeadingLabel;}
-	public JButton getEngineButton()		{ return this.engineButton;}
-	public JButton getTyreButton()			{ return this.tyreButton;}
+	public JLabel getSlotHeadingLabel(){ return this.slotHeadingLabel;}
+	public JButton getEngineButton(){ return this.engineButton;}
+	public JButton getTyreButton()	{ return this.tyreButton;}
 	public JButton getLightSystemButton()	{ return this.lightSystemButton;}
-	public Car getCar() 					{ return this.car; }
+	public Car getCar() { return this.car; }
 	
 	// Method to Add a car into a Slot
 	public void addCarToSlot(Car c)	
@@ -69,7 +69,7 @@ class Slot
 	public boolean isEmpty()
 	{
 		if (this.car == null ) 	return true; 
-		else 					return false;
+		else return false;
 	}
 }// End of Class Slot
 
@@ -83,36 +83,36 @@ class AssemblyLine
 	// Constructor Method
 	AssemblyLine()
 	{
-		slots = new Slot[10];										// An Assembly Line has 10 fixed Slots
-		assemblyLineInitialized	=	assemblyLineStarted	=	false;	// Initial Staus : Not Initialized and Not Started
+		slots = new Slot[10];		// An Assembly Line has 10 fixed Slots
+		assemblyLineInitialized	=assemblyLineStarted	=	false;	// Initial Staus : Not Initialized and Not Started
 	}
 	// Accessor Methods
-	public synchronized Slot[]  getSlots()		{ return slots;}
-	public synchronized boolean isInitialized()	{ return assemblyLineInitialized;}
-	public synchronized boolean isStarted()		{ return assemblyLineStarted;}
+	public synchronized Slot[]  getSlots()	{ return slots;}
+	public synchronized boolean isInitialized(){ return assemblyLineInitialized;}
+	public synchronized boolean isStarted()	{ return assemblyLineStarted;}
 
 	// Methods to Initialize and Start an Assembly Line
-	public void initialize()		{	assemblyLineInitialized = true;	}
-	public void synchronized start()				{	assemblyLineStarted = true; this.notifyAll();		}
+	public void initialize(){	assemblyLineInitialized = true;	}
+	public void synchronized start(){	assemblyLineStarted = true; this.notifyAll();		}
 
 }// End of class AssemblyLine
 
 // Class to Add a Car to various Slots of an Assembly Line
 class AdderThread extends Thread
 {
-	private AssemblyLine 	assemblyLine;		// 	Assembly Line instance
-	private JTextArea 		threadsTextArea;	//	The JTextArea instance of the Frame to write various messages
-	private JButton			adderThreadButton;	//	AdderThread Button of the Frame
-	private int				no_of_CarsAdded;	//	count of how many cars has been added
-	private int				no_of_Iterations;	// 	count of how many times the thread has got a chance to execute
+	private AssemblyLine assemblyLine;		// 	Assembly Line instance
+	private JTextArea threadsTextArea;	//	The JTextArea instance of the Frame to write various messages
+	private JButton	adderThreadButton;	//	AdderThread Button of the Frame
+	private int no_of_CarsAdded;	//	count of how many cars has been added
+	private int no_of_Iterations;	// 	count of how many times the thread has got a chance to execute
 	
 	// Constructor Method
 	AdderThread(AssemblyLine assemblyLine, JTextArea threadsTextArea,JButton adderThreadButton)
 	{
-		this.assemblyLine 		= assemblyLine;
-		this.threadsTextArea	= threadsTextArea;
+		this.assemblyLine = assemblyLine;
+		this.threadsTextArea = threadsTextArea;
 		this.adderThreadButton	= adderThreadButton;
-		no_of_Iterations		= no_of_CarsAdded	=	0;
+		no_of_Iterations = no_of_CarsAdded	=	0;
 	}
 	
 	// Run Method
@@ -185,18 +185,18 @@ class AdderThread extends Thread
 class EngineThread extends Thread
 {
 	private AssemblyLine 	assemblyLine;				// 	Assembly Line instance
-	private JTextArea 		threadsTextArea;			//	The JTextArea instance of the Frame to write various messages
-	private JButton			engineThreadButton;			//	EngineThread Button of the Frame
-	private int				no_of_CarsAdded;			//  count of the cars into which the engines has been added
-	private int				no_of_Iterations;			//	count of how many times the thread has got a chance to execute
+	private JTextArea threadsTextArea;			//	The JTextArea instance of the Frame to write various messages
+	private JButton	engineThreadButton;			//	EngineThread Button of the Frame
+	private intmno_of_CarsAdded;			//  count of the cars into which the engines has been added
+	private int no_of_Iterations;			//	count of how many times the thread has got a chance to execute
 	
 	// Constructor Method
 	EngineThread(AssemblyLine assemblyLine, JTextArea threadsTextArea,JButton engineThreadButton)
 	{
-		this.assemblyLine 		= assemblyLine;
+		this.assemblyLine = assemblyLine;
 		this.threadsTextArea	= threadsTextArea;
 		this.engineThreadButton	= engineThreadButton;
-		no_of_Iterations		= no_of_CarsAdded	=	0;
+		no_of_Iterations = no_of_CarsAdded	=	0;
 	}
 	
 	// run Method
@@ -270,18 +270,18 @@ class EngineThread extends Thread
 // Tyre Thread Class adda tyres to a Car 
 class TyreThread extends Thread
 {
-	private AssemblyLine 	assemblyLine;			// The same explanation as given above
-	private JTextArea 		threadsTextArea;		// The same explanation as given above
-	private JButton			tyreThreadButton;		// The same explanation as given above
-	private int				no_of_CarsAdded;		// The same explanation as given above
-	private int				no_of_Iterations;		// The same explanation as given above
+	private AssemblyLine assemblyLine;			// The same explanation as given above
+	private JTextArea threadsTextArea;		// The same explanation as given above
+	private JButton	tyreThreadButton;		// The same explanation as given above
+	private int no_of_CarsAdded;		// The same explanation as given above
+	private int no_of_Iterations;		// The same explanation as given above
 	
 	TyreThread(AssemblyLine assemblyLine, JTextArea threadsTextArea,JButton tyreThreadButton)
 	{
-		this.assemblyLine 		= assemblyLine;
-		this.threadsTextArea	= threadsTextArea;
-		this.tyreThreadButton	= tyreThreadButton;
-		no_of_Iterations		= no_of_CarsAdded	=	0;
+		this.assemblyLine = assemblyLine;
+		this.threadsTextArea= threadsTextArea;
+		this.tyreThreadButton= tyreThreadButton;
+		no_of_Iterations= no_of_CarsAdded	=	0;
 	}
 	
 	public void run()
@@ -358,18 +358,18 @@ class TyreThread extends Thread
 class LightThread extends Thread
 {
 	private AssemblyLine 	assemblyLine;		// The same explanation as given above
-	private JTextArea 		threadsTextArea;	// The same explanation as given above 
-	private JButton			lightThreadButton;	// The same explanation as given above 
-	private int				no_of_CarsAdded;	// The same explanation as given above
-	private int				no_of_Iterations;	// The same explanation as given above
+	private JTextArea threadsTextArea;	// The same explanation as given above 
+	private JButton	lightThreadButton;	// The same explanation as given above 
+	private int no_of_CarsAdded;	// The same explanation as given above
+	private int no_of_Iterations;	// The same explanation as given above
 	
 	// Constructor Method
 	LightThread(AssemblyLine assemblyLine, JTextArea threadsTextArea,JButton lightThreadButton)
 	{
-		this.assemblyLine 		= assemblyLine;
+		this.assemblyLine = assemblyLine;
 		this.threadsTextArea	= threadsTextArea;
 		this.lightThreadButton	= lightThreadButton;
-		no_of_Iterations		= no_of_CarsAdded	=	0;
+		no_of_Iterations = no_of_CarsAdded	=	0;
 	}
 	
 	// Run Method
@@ -449,19 +449,19 @@ class LightThread extends Thread
 // The Remove Thread removes a car from the selected slot 
 class RemoveThread extends Thread
 {
-	private AssemblyLine 	assemblyLine;			// The same explanation as given above
-	private JTextArea 		threadsTextArea;		// The same explanation as given above
-	private JButton			removeThreadButton;		// The same explanation as given above
-	private int				no_of_CarsAdded;		// The same explanation as given above
-	private int				no_of_Iterations;		// The same explanation as given above
+	private AssemblyLine assemblyLine;			// The same explanation as given above
+	private JTextArea threadsTextArea;		// The same explanation as given above
+	private JButton	removeThreadButton;		// The same explanation as given above
+	private int no_of_CarsAdded;		// The same explanation as given above
+	private int no_of_Iterations;		// The same explanation as given above
 	
 	// Constructor Method
 	RemoveThread(AssemblyLine assemblyLine, JTextArea threadsTextArea,JButton removeThreadButton)
 	{
-		this.assemblyLine 		= assemblyLine;
+		this.assemblyLine = assemblyLine;
 		this.threadsTextArea	= threadsTextArea;
 		this.removeThreadButton	= removeThreadButton;
-		no_of_Iterations		= no_of_CarsAdded	=	0;
+		no_of_Iterations= no_of_CarsAdded	=	0;
 	}
 	
 	// Run Method
@@ -542,21 +542,21 @@ class OnlineTest
 {
 	
 	// Shared Variables Among the Threads
-	private static AssemblyLine	assemblyLine 		= 	new AssemblyLine();					//  An Assembly Line Instance
-	private static JTextArea threadsTextArea		=	new JTextArea(20,100);				//	Area to show the Traces of Thread Execution 
-	private static JScrollPane adderscroller		=	new JScrollPane(threadsTextArea);	//	Slider for ThreadsTextArea
+	private static AssemblyLine	assemblyLine = 	new AssemblyLine();					//  An Assembly Line Instance
+	private static JTextArea threadsTextArea =	new JTextArea(20,100);				//	Area to show the Traces of Thread Execution 
+	private static JScrollPane adderscroller =	new JScrollPane(threadsTextArea);	//	Slider for ThreadsTextArea
 	
 	// Main Frame Window Instance
-	private static JFrame assemblyFrame 			= 	new JFrame("Car Assembly Line");
+	private static JFrame assemblyFrame = 	new JFrame("Car Assembly Line");
 	
 	// Assembly Controller Variables
-	private static JLabel carAssemblyController 	= 	new JLabel("Car Assembly Controller");
-	private static JButton initialize 				= 	new JButton("Initilize");				// Initialize Button 
-	private static JButton start 					= 	new JButton("Start");					// Start Button
+	private static JLabel carAssemblyController = 	new JLabel("Car Assembly Controller");
+	private static JButton initialize = 	new JButton("Initilize");				// Initialize Button 
+	private static JButton start = 	new JButton("Start");					// Start Button
 	
 	
 	// Slot Panel Variables
-	private static JLabel carAssemblyLineLabel		=	new JLabel("Car Assembly Line");
+	private static JLabel carAssemblyLineLabel =	new JLabel("Car Assembly Line");
 
 	// Slot 1 Variables
 	private static JLabel  slot1	=	new JLabel("Slot I");
